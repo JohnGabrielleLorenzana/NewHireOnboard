@@ -1,0 +1,70 @@
+<?php
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+
+include("Connection.php");
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    if (empty($_POST["Email"])) {
+        $Emailerr = "Email is Required";
+    } else {
+        $Email = $_POST["Email"];
+    }
+
+    if (empty($_POST["Password"])) {
+        $passworderr = "Password is Required";
+    } else {
+        $Password = $_POST["Password"];
+    }
+
+    if (isset($Email) && isset($Password)) {
+        include("Index.php");
+        $check_email = mysqli_query($connections, "SELECT * FROM login_tbl WHERE Email = '$Email'");
+        $check_email_row = mysqli_num_rows($check_email);
+
+        if ($check_email_row > 0) {
+            $row = mysqli_fetch_assoc($check_email);
+            $db_Password = $row["Password"];
+            $db_Account_type = $row["Account_type"];
+            if ($db_Password == $Password) {
+                $_SESSION["user_id"] = $row["user_id"];
+                if ($db_Account_type == "1") {
+                    echo "<script> window.location.href = 'admin' ;</script>";
+                    exit();
+                } else {
+                    echo "<script> window.location.href = 'user' ;</script>";
+                    exit();
+                }
+            } else {
+                $passworderr = "Incorrect Password";
+            }
+        } else {
+            $Emailerr = "Email is not registered";
+        }
+    } else {
+        $Emailerr = "Email is Required";
+        $passworderr = "Password is Required";
+    }
+}
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>New Hire Onboard</title>
+</head>
+<body>
+    <h1>New Hire Onboard</h1>
+    <div class="container">
+        <form action="" method="post">
+            <input name="Email" type="text" placeholder="Email" required><br>
+            <input name="Password" type="password" placeholder="Password" required><br>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+</body>
+</html>

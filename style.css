@@ -1,0 +1,70 @@
+body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: url(hud.jpg);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    overflow: hidden;
+}
+h1 {
+    color: #fff;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bolder;
+    letter-spacing: 10px;
+}
+.container {
+    padding: 10px;
+    max-width: max-content;
+    display: block;
+    text-align: center;
+    justify-content: center;
+    background-color: transparent;
+    border: solid aqua 1px;
+    box-shadow: 5px 15px 80px 20px;
+    border-radius: 10px;
+}
+.container .h1 .input {
+    color: #333;
+}
+
+@media screen and (max-width: 768px) {
+    .container {
+      padding: 20px;
+    }
+}
+  
+@media screen and (max-width: 480px) {
+    .container {
+      padding: 10px;
+    }
+}
+  
+
+input {
+    text-align: center;
+    padding: 10px;
+    max-width: fit-content;
+    margin: 5px;
+    border-radius: 15px;
+}
+#Submit-btn {
+    margin: 5px;
+    padding: 10px;
+    max-width: fit-content;
+    border-radius: 15px;
+    background-color: cornflowerblue;
+    color: #fff;
+}
+#Submit-btn:hover {
+    background-color: aqua;
+    color: midnightblue;
+    transition-duration: .7s;
+}
+
+.form {
+    padding: 10px;
+}
